@@ -1,4 +1,4 @@
-# MPV
+# MPV (Mass Plist Viewer)
 ![Screenshot](https://s3.ca-central-1.amazonaws.com/forensicmike/massPlistViewer.png)
 
 

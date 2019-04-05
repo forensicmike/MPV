@@ -1,0 +1,378 @@
+﻿[
+  {
+    "Path": "com.apple.mobilesafari/Library/Safari/SuspendedState.plist",
+    "File": "SuspendedState.plist",
+    "Description": "Safari Suspended State Tab"
+  },
+  {
+    "Path": "com.apple.icloud.findmydeviced.FMIPAccounts.plist",
+    "File": "com.apple.icloud.findmydeviced.FMIPAccounts.plist",
+    "Description": "Find My iPhone settings"
+  },
+  {
+    "Path": "/Library/BullitenBoard/ClearedSections.plist",
+    "File": "ClearedSections.plist",
+    "Description": "Logs of cleared notifications"
+  },
+  {
+    "Path": "/Library/Caches/locationd/significant.plist",
+    "File": "significant.plist",
+    "Description": "Significant Location"
+  },
+  {
+    "Path": "/Library/Caches/locationd/significantVisitAuth.plist",
+    "File": "significantVisitAuth.plist",
+    "Description": "Significant Location"
+  },
+  {
+    "Path": "/Library/Caches/locationd/significantVisitInterest.plist",
+    "File": "significantVisitInterest.plist",
+    "Description": "Significant Location"
+  },
+  {
+    "Path": "/Library/ConfigurationProfiles/UserSettings.plist",
+    "File": "UserSettings.plist",
+    "Description": "User created restrictions"
+  },
+  {
+    "Path": "/Library/DataAccess/AccountInformation.plist",
+    "File": "AccountInformation.plist",
+    "Description": "Email sync data"
+  },
+  {
+    "Path": "/Library/DataAccess/iCloud-[iCloud email account name]/.mboxCache.plist",
+    "File": ".mboxCache.plist",
+    "Description": "iCloud Email account information"
+  },
+  {
+    "Path": "/Library/DeviceRegistry.state/activeStateMachine.plist",
+    "File": "activeStateMachine.plist",
+    "Description": "Apple Watch pairing information"
+  },
+  {
+    "Path": "/Library/DeviceRegistry.state/recoveryManager-<GUID>.plist",
+    "File": "recoveryManager-*.plist",
+    "Description": "Previously paired Apple Watch information"
+  },
+  {
+    "Path": "/Library/DeviceRegistry.state/stateMachine-<GUID>.plist",
+    "File": "stateMachine-*.plist",
+    "Description": "Previously paired Apple Watch information"
+  },
+  {
+    "Path": "/Library/FrontBoard/applicationState.db",
+    "File": "applicationState.db",
+    "Description": "Application Traces"
+  },
+  {
+    "Path": "/Library/Maps/Bookmarks.plist",
+    "File": "Bookmarks.plist",
+    "Description": "Maps bookmarks"
+  },
+  {
+    "Path": "/Library/Preferences.com.apple.preferences.datetime.plist",
+    "File": "Preferences.com.apple.preferences.datetime.plist",
+    "Description": "Time settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.madrid.plist",
+    "File": "com.apple.madrid.plist",
+    "Description": "SMS, iMessage and FaceTime"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.mobilenotes.plist",
+    "File": "com.apple.mobilenotes.plist",
+    "Description": "Notes"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.mobileslideshow.plist",
+    "File": "com.apple.mobileslideshow.plist",
+    "Description": "Photos"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.MobileSMS.plist",
+    "File": "com.apple.MobileSMS.plist",
+    "Description": "SMS, iMessage and FaceTime"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.preferences.network.plist",
+    "File": "com.apple.preferences.network.plist",
+    "Description": "Airplane Mode Settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.purplebuddy.plist",
+    "File": "com.apple.purplebuddy.plist",
+    "Description": "Language, Country info, Device IDs"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.springboard.plist",
+    "File": "com.apple.springboard.plist",
+    "Description": "User created restrictions/Remote wipe settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.weather.plist",
+    "File": "com.apple.weather.plist",
+    "Description": "Weather (including current city)"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.WebFoundation.plist",
+    "File": "com.apple.WebFoundation.plist",
+    "Description": "Safari activity"
+  },
+  {
+    "Path": "/Library/SpringBoard/IconState.plist",
+    "File": "IconState.plist",
+    "Description": "Homescreen icon layout"
+  },
+  {
+    "Path": "/Lockdown/device_values.plist",
+    "File": "device_values.plist",
+    "Description": "Activated state, BT address and more"
+  },
+  {
+    "Path": "/Preferences/com.apple.assistant.backedup.plist",
+    "File": "com.apple.assistant.backedup.plist",
+    "Description": "Cloud sync settings"
+  },
+  {
+    "Path": "/Preferences/com.apple.coreduetd.plist",
+    "File": "com.apple.coreduetd.plist",
+    "Description": "sync devices"
+  },
+  {
+    "Path": "/Preferences/com.apple.homesharing.plist",
+    "File": "com.apple.homesharing.plist",
+    "Description": "iCloud account information"
+  },
+  {
+    "Path": "/Preferences/com.apple.NanoRegistry.plist",
+    "File": "com.apple.NanoRegistry.plist",
+    "Description": "Apple Watch pairing information"
+  },
+  {
+    "Path": "/preferences/SystemConfiguration/com.apple.accounts.exists.plist",
+    "File": "com.apple.accounts.exists.plist",
+    "Description": "Account information"
+  },
+  {
+    "Path": "/preferences/SystemConfiguration/com.apple.networkidentification.plist",
+    "File": "com.apple.networkidentification.plist",
+    "Description": "Network IP, WiFi, Cellular"
+  },
+  {
+    "Path": "/SystemConfiguration/com.apple.wifi.plist",
+    "File": "com.apple.wifi.plist",
+    "Description": "WiFi"
+  },
+  {
+    "Path": "/SystemConfiguration/preferences.plist",
+    "File": "preferences.plist",
+    "Description": "WiFi, VPN, Certs and more"
+  },
+  {
+    "Path": "/wireless/Library/Preferences/com.apple.commcenter.plist",
+    "File": "com.apple.commcenter.plist",
+    "Description": "Device Info (IMEI, Phone Number, SIM/eSIM, etc.)"
+  },
+  {
+    "Path": "CloudConfigurationDetails.plist",
+    "File": "CloudConfigurationDetails.plist",
+    "Description": "Cloud configurations"
+  },
+  {
+    "Path": "com.apple.accountsettings.plist ",
+    "File": "com.apple.accountsettings.plist ",
+    "Description": "Email accounts pushed to device"
+  },
+  {
+    "Path": "com.apple.commcenter.plist ",
+    "File": "com.apple.commcenter.plist ",
+    "Description": "Device phone number, Network carrier, ICCIDs and IMSIs"
+  },
+  {
+    "Path": "com.apple.conference.plist ",
+    "File": "com.apple.conference.plist ",
+    "Description": "Facetime phone number in use, SMS phone number, user accounts"
+  },
+  {
+    "Path": "com.apple.identityservices.idstatuscache.plist",
+    "File": "com.apple.identityservices.idstatuscache.plist",
+    "Description": "iCloud sync, Email, FaceTime, Email, more"
+  },
+  {
+    "Path": "com.apple.Maps.plist ",
+    "File": "com.apple.Maps.plist ",
+    "Description": "Last latitude and longitude, map search history"
+  },
+  {
+    "Path": "com.apple.mmcs.plist ",
+    "File": "com.apple.mmcs.plist ",
+    "Description": "IMSIs"
+  },
+  {
+    "Path": "com.apple.MobileBluetooth.devices.plist",
+    "File": "com.apple.MobileBluetooth.devices.plist",
+    "Description": "Synced devices"
+  },
+  {
+    "Path": "com.apple.MobileBluetooth.devices.plist",
+    "File": "com.apple.MobileBluetooth.devices.plist",
+    "Description": "Synced devices (search db for items found in plist)"
+  },
+  {
+    "Path": "com.MobileSMS.plist",
+    "File": "com.MobileSMS.plist",
+    "Description": "Time to keep messages"
+  },
+  {
+    "Path": "group.com.apple.Maps.plist",
+    "File": "group.com.apple.Maps.plist",
+    "Description": "Last latitude and longitude, map search history"
+  },
+  {
+    "Path": "info.plist",
+    "File": "info.plist",
+    "Description": "Identifiers about iOS device (phone number, version, etc)"
+  },
+  {
+    "Path": "manifest.plist",
+    "File": "manifest.plist",
+    "Description": "Encryption state, installed apps and more"
+  },
+  {
+    "Path": "status.plist",
+    "File": "status.plist",
+    "Description": "Last backup date and other identifiers"
+  },
+  {
+    "Path": "/Library/locationd/user.plist",
+    "File": "user.plist",
+    "Description": "Step/Stride Cadence, Pedometer Info"
+  },
+  {
+    "Path": "/Library/Preferences/addaily.plist",
+    "File": "addaily.plist",
+    "Description": "Application Traces"
+  },
+  {
+    "Path": "/Library/Preferences/com/apple.accounts.plist",
+    "File": "apple.accounts.plist",
+    "Description": "Migration Account Sync Information"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.ActivitySharing.plist",
+    "File": "com.apple.ActivitySharing.plist",
+    "Description": "Information about Fitness Friends"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.AdLib.plist",
+    "File": "com.apple.AdLib.plist",
+    "Description": "May show older iOS versions used"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.aggregated.plist",
+    "File": "com.apple.aggregated.plist",
+    "Description": "Last BootTime"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.airplay.plist",
+    "File": "com.apple.airplay.plist",
+    "Description": "AppleMusic and iCloud Library settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.appleseed.FeedbackAssistant.plist",
+    "File": "com.appleseed.FeedbackAssistant.plist",
+    "Description": "Last successful email address used to login to cloud"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.BatteryCenter.BatteryWidget.plist",
+    "File": "com.apple.BatteryCenter.BatteryWidget.plist",
+    "Description": "Battery icon status"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.camera.plist",
+    "File": "com.apple.camera.plist",
+    "Description": "Camera settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.carplay.plist",
+    "File": "com.apple.carplay.plist",
+    "Description": "Type of vehicle synced with and some settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.celestial.plist",
+    "File": "com.apple.celestial.plist",
+    "Description": "Camera,  CarPlay, Volumes and other settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.cloudphotod.plist",
+    "File": "com.apple.cloudphotod.plist",
+    "Description": "Cloud photo sync information"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.cmfsyncagent.plist",
+    "File": "com.apple.cmfsyncagent.plist",
+    "Description": "Blocked Dialers"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.commcenter.shared.plist",
+    "File": "com.apple.commcenter.shared.plist",
+    "Description": "Phone number"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.contextstored.plist ",
+    "File": "com.apple.contextstored.plist ",
+    "Description": "Activity throttling"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.coreduetd.plist",
+    "File": "com.apple.coreduetd.plist",
+    "Description": "Activity throttling"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.contacts.donation-agent.plist",
+    "File": "com.apple.contacts.donation-agent.plist",
+    "Description": "Last Metrics Attempts (usage information)"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.CoreDuet.plist",
+    "File": "com.apple.CoreDuet.plist",
+    "Description": "Cloud Sync settings"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.CoreDuet.QueuedDenials.plist",
+    "File": "com.apple.CoreDuet.QueuedDenials.plist",
+    "Description": "Cloud Sync denials and dates"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.corerecents.recentsd.plist",
+    "File": "com.apple.corerecents.recentsd.plist",
+    "Description": "iCloud login information"
+  },
+  {
+    "Path": "/Library/Preferences/com.apple.corespotlightui.plist",
+    "File": "com.apple.corespotlightui.plist",
+    "Description": "Application Traces"
+  },
+  {
+    "Path": "/SystemConfiguration/com.apple.networkidentification.plist",
+    "File": "com.apple.networkidentification.plist",
+    "Description": "Cellular and Network Information"
+  },
+  {
+    "Path": "/SystemConfiguration/preferences.plist",
+    "File": "preferences.plist",
+    "Description": "Network and VPN information"
+  },
+  {
+    "Path": "/Library/Caches/locationd/clients.plist",
+    "File": "clients.plist",
+    "Description": "Application Traces"
+  },
+  {
+    "Path": "",
+    "File": "",
+    "Description": ""
+  }
+]
+

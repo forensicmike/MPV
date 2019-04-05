@@ -1,0 +1,132 @@
+﻿<metro:MetroWindow x:Class="MassPlistViewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MassPlistViewer"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        xmlns:avalon="http://icsharpcode.net/sharpdevelop/avalonedit"
+        mc:Ignorable="d"
+        AllowDrop="True" x:Name="win1" Drop="Win1_Drop"
+                   Icon="/MassPlistViewer;component/plistFilter.png"
+        Title="Mass Plist Viewer" Height="450" Width="800">
+
+    <metro:MetroWindow.RightWindowCommands>
+        <metro:WindowCommands>
+            <Button Command="{Binding aboutCommand}">
+                <materialDesign:PackIcon Kind="InformationOutline" />
+            </Button>
+        </metro:WindowCommands>
+    </metro:MetroWindow.RightWindowCommands>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <materialDesign:Card Padding="10" Margin="6" Grid.Row="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <materialDesign:ColorZone Grid.Column="0" materialDesign:ColorZoneAssist.Mode="PrimaryLight" Height="30" Width="30">
+                    <materialDesign:PackIcon Kind="Folder" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                </materialDesign:ColorZone>
+                <TextBox Grid.Column="1" Margin="12,0" materialDesign:ColorZoneAssist.Mode="PrimaryLight" Text="{Binding LoadPath}" FontSize="14" />
+                <Button Grid.Column="2" ToolTip="Load SQLite file..." Command="{Binding loadSQLiteFileCommand}">
+                    <materialDesign:PackIcon Kind="Play" />
+                </Button>
+            </Grid>
+        </materialDesign:Card>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.6*" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Margin="0,0,5,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <materialDesign:ColorZone Mode="Standard" Grid.Row="0" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1" Margin="4" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{DynamicResource MaterialDesignToolButton}">
+                            <materialDesign:PackIcon Kind="Magnify" Opacity=".56" />
+                        </Button>
+                        <TextBox Grid.Column="1" Margin="8 0 0 0" materialDesign:HintAssist.Hint="Search plists/content..." materialDesign:TextFieldAssist.DecorationVisibility="Hidden" BorderThickness="0" MinWidth="200" VerticalAlignment="Center" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                </materialDesign:ColorZone>
+                <materialDesign:ColorZone Mode="Standard" Grid.Row="1" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1" Margin="4" Background="#FF252525">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="4" >
+                    <materialDesign:PackIcon Kind="Filter" />
+                    <TextBlock Foreground="White" VerticalAlignment="Center" Text="FOR585 Cheatsheet" Margin="0,0,8,0" />
+                    <ToggleButton HorizontalAlignment="Right"  Style="{StaticResource MaterialDesignSwitchDarkToggleButton}"  IsChecked="{Binding FilterByCheatSheet}" />
+                </StackPanel>
+                </materialDesign:ColorZone>
+                <ListView Grid.Row="2" ItemsSource="{Binding LoadedDataCVS}" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="5,0" SelectedItem="{Binding SelectedPlist}">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="ContextMenu">
+                                <Setter.Value>
+                                    <ContextMenu>
+                                        <MenuItem Header="Open Plist in Notepad++" Command="{Binding openPlistInNotepadPPCommand}" />
+                                    </ContextMenu>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <!--<Border BorderBrush="White" BorderThickness="1" CornerRadius="6" Padding="4" Margin="2" HorizontalAlignment="Stretch">-->
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="6">
+                                    <TextBlock Text="{Binding Name}" HorizontalAlignment="Right" />
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                                    <StackPanel.Style>
+                                        <Style TargetType="StackPanel">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding assocCheatSheet}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Hidden" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </StackPanel.Style>
+                                        <TextBlock Text="{Binding assocCheatSheet.Description}" FontSize="10" Margin="5,0" TextWrapping="Wrap" VerticalAlignment="Center" />
+                                        <materialDesign:PackIcon Kind="SimAlert" Margin="2" HorizontalAlignment="Right" />
+                                    </StackPanel>
+                                </StackPanel>
+                            
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <materialDesign:ColorZone Mode="Standard" Grid.Row="3" Padding="8 4 8 4" CornerRadius="2" Panel.ZIndex="1" Margin="4" materialDesign:ShadowAssist.ShadowDepth="Depth1">
+                    <TextBlock Text="{Binding StatusText}" TextWrapping="Wrap" />
+                </materialDesign:ColorZone>
+            </Grid>
+           
+            <GridSplitter Grid.Column="0" Width="5" BorderBrush="Red" BorderThickness="2" />
+
+            <avalon:TextEditor Grid.Column="1" SyntaxHighlighting="JavaScript" x:Name="textEditor" ShowLineNumbers="True" Foreground="White" LineNumbersForeground="White" ScrollViewer.HorizontalScrollBarVisibility="Disabled" IsReadOnly="True">
+                
+            </avalon:TextEditor>
+        </Grid>
+    </Grid>
+</metro:MetroWindow>

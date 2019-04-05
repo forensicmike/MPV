@@ -41,8 +41,8 @@
                 <materialDesign:ColorZone Grid.Column="0" materialDesign:ColorZoneAssist.Mode="PrimaryLight" Height="30" Width="30">
                     <materialDesign:PackIcon Kind="Folder" Width="24" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center" />
                 </materialDesign:ColorZone>
-                <TextBox Grid.Column="1" Margin="12,0" materialDesign:ColorZoneAssist.Mode="PrimaryLight" Text="{Binding LoadPath}" FontSize="14" />
-                <Button Grid.Column="2" ToolTip="Load SQLite file..." Command="{Binding loadSQLiteFileCommand}">
+                <TextBox Grid.Column="1" materialDesign:HintAssist.Hint="Path to Flattened Directory Containing Plist Files..." Margin="12,0" materialDesign:ColorZoneAssist.Mode="PrimaryLight" Text="{Binding LoadPath}" FontSize="14" />
+                <Button Grid.Column="2" ToolTip="Load SQLite file..." Command="{Binding loadDirectoryCommand}">
                     <materialDesign:PackIcon Kind="Play" />
                 </Button>
             </Grid>

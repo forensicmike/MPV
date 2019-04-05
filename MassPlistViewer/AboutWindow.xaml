@@ -10,29 +10,14 @@
         <materialDesign:Card Width="300">
             <Grid Margin="0,0,0,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition
-        Height="200" />
-                    <RowDefinition
-        Height="*" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Image
-      Source="applebg.jpg"
-      Height="200"
-      
-      Stretch="UniformToFill" />
-                <Button
-      Grid.Row="0"
-      Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                    Background="#FF252525"
-                    BorderBrush="LightBlue"
-      HorizontalAlignment="Right"
-      VerticalAlignment="Bottom"
-      Margin="0 0 16 -20">
+                <Image Source="applebg.jpg" Height="200" Stretch="UniformToFill" />
+                <Button Grid.Row="0" Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="#FF252525" BorderBrush="LightBlue" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 16 -20">
                     <Image RenderOptions.BitmapScalingMode="HighQuality" Source="/MassPlistViewer;component/plistFilter.png" Height="25" />
                 </Button>
-                <Grid
-      Grid.Row="1"
-      Margin="8 24 8 0">
+                <Grid Grid.Row="1" Margin="8 24 8 0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition />
@@ -40,9 +25,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" FontWeight="Bold" TextAlignment="Center">Mass Plist Viewer (MPV)</TextBlock>
                     <ScrollViewer Grid.Row="1" ScrollViewer.VerticalScrollBarVisibility="Auto">
-                    <TextBlock
-        TextWrapping="Wrap" TextAlignment="Center" FontSize="11"
-        VerticalAlignment="Center">
+                    <TextBlock TextWrapping="Wrap" TextAlignment="Center" FontSize="11" VerticalAlignment="Center">
       This application was developed in the SANS FOR585 Smartphone Forensics course by Mike Williamson of Calgary, Canada in April 2019. It is licensed for non-commercial use under GNU General Public License v3.0.
                         The cheatsheet and its descriptions were compiled by Heather Mahalik of SANS Institute. [<Hyperlink Foreground="Yellow" Click="Hyperlink_Click">View License</Hyperlink>]
                     </TextBlock>

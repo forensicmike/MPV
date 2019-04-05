@@ -20,8 +20,6 @@ using System.Data.SQLite;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
 using Newtonsoft.Json;
-using ICSharpCode.AvalonEdit.Rendering;
-using ICSharpCode.AvalonEdit.Document;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Reflection;
@@ -41,18 +39,21 @@ namespace MassPlistViewer
             ViewModel.MainWindowRef = this;
             ViewModel.textEditor = textEditor;
 
+            // Colorization for when the user is searching stuff.
+            // Thanks StackOverflow!
             textEditor.TextArea.TextView.LineTransformers.Add(new ColorizeAvalonEdit());
             textEditor.TextArea.TextView.LinkTextForegroundBrush = Brushes.Yellow;
             textEditor.TextArea.SelectionChanged += textEditor_TextArea_SelectionChanged;
+        }
 
-            void textEditor_TextArea_SelectionChanged(object sender, EventArgs e)
-            {
-                this.textEditor.TextArea.TextView.Redraw();
-            }
+        void textEditor_TextArea_SelectionChanged(object sender, EventArgs e)
+        {
+            this.textEditor.TextArea.TextView.Redraw();
         }
 
         public ViewModel viewModel { get; set; }
 
+        //  Handle drag & drop of plists en masse.
         private void Win1_Drop(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent("FileDrop"))
@@ -63,64 +64,18 @@ namespace MassPlistViewer
         }
     }
 
-    public class ColorizeAvalonEdit : DocumentColorizingTransformer
-    {
-        protected override void ColorizeLine(DocumentLine line)
-        {
-            if (ViewModel.ActiveSearchTerms == null || ViewModel.ActiveSearchTerms.Count() == 0)
-            {
-                return;
-            }
-
-            int lineStartOffset = line.Offset;
-            string text = CurrentContext.Document.GetText(line);
-            int start = 0;
-            int index;
-            foreach (var term in ViewModel.ActiveSearchTerms)
-            {
-                while ((index = text.IndexOf(term, start)) >= 0)
-                {
-                    base.ChangeLinePart(
-                        lineStartOffset + index, // startOffset
-                        lineStartOffset + index + term.Length, // endOffset
-                        (VisualLineElement element) =>
-                        {
-                        // This lambda gets called once for every VisualLineElement
-                        // between the specified offsets.
-                        Typeface tf = element.TextRunProperties.Typeface;
-                        // Replace the typeface with a modified version of
-                        // the same typeface
-                        element.TextRunProperties.SetTypeface(new Typeface(
-                                tf.FontFamily,
-                                FontStyles.Italic,
-                                FontWeights.Bold,
-                                tf.Stretch
-                            ));
-                            element.TextRunProperties.SetFontRenderingEmSize(20.0);
-                            element.TextRunProperties.SetBackgroundBrush(Brushes.LightGreen);
-                        });
-                    start = index + 1; // search for next occurrence
-                }
-            }
-        }
-    }
-
-    public class CheatSheetEntry {
-        public string Path { get; set; }
-        public string File { get; set; }
-        public string Description { get; set; }
-    }
-
     public class ViewModel : INotifyPropertyChanged
     {
         public ViewModel()
         {
+            // We use this to delay searches by a few seconds while the user is actively typing.
             dtSearchThrottle.Tick += (o, e) =>
             {
                 NotifyPropertyChanged("LoadedDataCVS");
                 dtSearchThrottle.Stop();
             };
 
+            // Load in the cheatsheet from JSON
             using (var sr = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream("MassPlistViewer.CheatSheet.json")))
             {
                 var cheatsheet = sr.ReadToEnd();
@@ -129,26 +84,13 @@ namespace MassPlistViewer
         }
 
         static public CheatSheetEntry[] CheatSheetEntries { get; set; }
-
-        //static public readonly string[] CheatSheetPlists = new string[] { "SuspendedState.plist", "com.apple.icloud.findmydeviced.FMIPAccounts.plist", "ClearedSections.plist", "significant.plist", "significantVisitAuth.plist", "significantVisitInterest.plist",
-        //    "UserSettings.plist", "AccountInformation.plist", ".mboxCache.plist", "activeStateMachine.plist", "Bookmarks.plist", "com.apple.preferences.datetime.plist",
-        //    "com.apple.madrid.plist", "com.apple.mobilenotes.plist", "com.apple.mobileslideshow.plist", "com.apple.MobileSMS.plist", "com.apple.preferences.network.plist", "com.apple.purplebuddy.plist",
-        //    "com.apple.springboard.plist", "com.apple.weather.plist", "com.apple.WebFoundation.plist", "IconState.plist", "device_values.plist", "com.apple.assistant.backedup.plist", "com.apple.coreduetd.plist", "com.apple.homesharing.plist",
-        //    "com.apple.NanoRegistry.plist", "com.apple.accounts.exists.plist", "com.apple.networkidentification.plist", "com.apple.wifi.plist", "preferences.plist", "com.apple.commcenter.plist",
-        //    "CloudConfigurationDetails.plist", "com.apple.accountsettings.plist", "com.apple.commcenter.plist", "com.apple.conference.plist", "com.apple.identityservices.idstatuscache.plist",
-        //    "com.apple.Maps.plist", "com.apple.mmcs.plist", "com.apple.MobileBluetooth.devices.plist", "info.plist", "manifest.plist", "status.plist", "user.plist", "addaily.plist",
-        //    "com.apple.accounts.plist", "com.apple.ActivitySharing.plist", "com.apple.AdLib.plist", "com.apple.aggregated.plist", "com.apple.airplay.plist", "com.appleseed.FeedbackAssistant.plist", "com.apple.BatteryCenter.BatteryWidget.plist",
-        //    "com.apple.camera.plist", "com.apple.carplay.plist", "com.apple.celestial.plist", "com.apple.cloudphotod.plist", "com.apple.cmfsyncagent.plist", "com.apple.commcenter.shared.plist",
-        //    "com.apple.contextstored.plist", "com.apple.contacts.donation-agent.plist", "com.apple.CoreDuet.plist", "com.apple.CoreDuet.QueuedDenials.plist", "com.apple.corerecents.recentsd.plist",
-        //    "com.apple.corespotlightui.plist", "com.apple.networkidentification.plist", "preferences.plist", "clients.plist"
-        //};
-        //static public readonly string[] RgxCheatSheet = new string[] { @"recoveryManager-[\w\W]*?\.plist", @"stateMachine-[\w\W]*?\.plist" };
-
-
         static public MetroWindow MainWindowRef;
         static public ICSharpCode.AvalonEdit.TextEditor textEditor;
+        static public string[] ActiveSearchTerms { get; set; }
 
+        DispatcherTimer dtSearchThrottle = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(300) };
 
+        #region UI controlled properties
         private bool _FilterByCheatSheet;
         public bool FilterByCheatSheet
         {
@@ -160,8 +102,6 @@ namespace MassPlistViewer
                 NotifyPropertyChanged("LoadedDataCVS");
             }
         }
-
-
 
         private string _loadPath = Properties.Settings.Default.LoadPath;
         public string LoadPath
@@ -192,10 +132,6 @@ namespace MassPlistViewer
             }
         }
 
-        static public string[] ActiveSearchTerms { get; set; }
-
-        DispatcherTimer dtSearchThrottle = new DispatcherTimer() { Interval = TimeSpan.FromMilliseconds(300) };
-
         private PlistViewModel _SelectedPlist;
         public PlistViewModel SelectedPlist
         {
@@ -212,7 +148,17 @@ namespace MassPlistViewer
             }
         }
 
-
+        private string _statusText;
+        public string StatusText
+        {
+            get { return _statusText; }
+            set
+            {
+                _statusText = value;
+                NotifyPropertyChanged("StatusText");
+            }
+        }
+        #endregion
 
         private ObservableCollection<PlistViewModel> _loadedData = new ObservableCollection<PlistViewModel>();
         public ObservableCollection<PlistViewModel> LoadedData
@@ -226,29 +172,7 @@ namespace MassPlistViewer
         }
 
         
-        private string _statusText;
-        public string StatusText
-        {
-            get { return _statusText; }
-            set
-            {
-                _statusText = value;
-                NotifyPropertyChanged("StatusText");
-            }
-        }
-
-
-        public void ApplySearchTextFilter(CollectionViewSource cvs)
-        {
-            var terms = SearchText.Split(' ');
-            ActiveSearchTerms = terms.ToArray();
-
-            cvs.Filter += (o, e) =>
-            {
-                var item = e.Item as PlistViewModel;
-                e.Accepted = terms.All(x => item.Name.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0 || item.Content.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0);
-            };
-        }
+        
 
         public ICollectionView LoadedDataCVS
         {
@@ -277,7 +201,7 @@ namespace MassPlistViewer
 
                         if (e.Accepted == true && terms != null)
                         {
-                            e.Accepted = terms.All(x => item.Name.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0 || item.Content.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                            e.Accepted = terms.All(x => item.Name.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0 || item.Content.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0 || item.assocCheatSheet?.Description.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0);
                         }
 
                     };
@@ -286,7 +210,14 @@ namespace MassPlistViewer
                 {
                     if (!string.IsNullOrWhiteSpace(SearchText))
                     {
-                        ApplySearchTextFilter(cvs);
+                        var terms = SearchText.Split(' ');
+                        ActiveSearchTerms = terms.ToArray();
+
+                        cvs.Filter += (o, e) =>
+                        {
+                            var item = e.Item as PlistViewModel;
+                            e.Accepted = terms.All(x => item.Name.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0 || item.Content.IndexOf(x, StringComparison.CurrentCultureIgnoreCase) >= 0);
+                        };
                     }
                 }
 
@@ -302,10 +233,22 @@ namespace MassPlistViewer
         public void HandlePlists(string[] inputFiles)
         {
             var results = new Dictionary<FileInfo, Claunia.PropertyList.NSObject>();
+            var errorCount = 0;
             foreach (var file in inputFiles)
             {
-                var plist = Claunia.PropertyList.PropertyListParser.Parse(file);
-                results.Add(new FileInfo(file), plist);
+                try
+                {
+                    var plist = Claunia.PropertyList.PropertyListParser.Parse(file);
+                    results.Add(new FileInfo(file), plist);
+                }
+                catch
+                {
+                    errorCount++;
+                }
+            }
+
+            if (errorCount > 0) {
+                MainWindowRef.ShowMessageAsync("Error FYI", $"A total of {errorCount} error(s) occurred while parsing items.");
             }
 
             var output = new List<PlistViewModel>();
@@ -314,7 +257,7 @@ namespace MassPlistViewer
                 var nPlist = new PlistViewModel()
                 {
                     Name = item.Key.Name,
-                    Content = JsonConvert.SerializeObject(item.Value),
+                    Content = JsonConvert.SerializeObject(item.Value, Formatting.Indented),
                     sourceFile = item.Key,
                     assocCheatSheet = CheatSheetEntries.FirstOrDefault(x => x.File.Equals(item.Key.Name, StringComparison.CurrentCultureIgnoreCase)),
                 };
@@ -335,10 +278,40 @@ namespace MassPlistViewer
                 LoadedData.Add(nPlist);
             }
 
+
+            // Just to update our counts
+            NotifyPropertyChanged("LoadedFilesCVS");
             return;
         }
 
+        #region Commanding
+
+        private InlineCommand _loadDirectoryCommand;
+        // Whatever dir the user inputted, scan for and load in plists.
+        public InlineCommand loadDirectoryCommand
+        {
+            get
+            {
+                if (_loadDirectoryCommand == null)
+                {
+                    _loadDirectoryCommand = new InlineCommand((obj) =>
+                    {
+                        // ..
+                        if (!Directory.Exists(LoadPath))
+                        {
+                            MainWindowRef.ShowMessageAsync("Error", "The specified path is not a folder.");
+                            return;
+                        }
+
+                        HandlePlists(Directory.GetFiles(LoadPath, "*.plist"));
+                    });
+                }
+                return _loadDirectoryCommand;
+            }
+        }
+
         private InlineCommand _loadSQLiteFileCommand;
+        // In the original design we pulled in the info from an SQLite db generated out of the app. Now meh..
         public InlineCommand loadSQLiteFileCommand
         {
             get
@@ -351,6 +324,7 @@ namespace MassPlistViewer
                         if (!File.Exists(LoadPath))
                         {
                             MainWindowRef.ShowMessageAsync("Error", "That file does not exist.");
+                            return;
                         }
 
                         using (var con = new SQLiteConnection($"Data Source={LoadPath}"))
@@ -397,6 +371,7 @@ namespace MassPlistViewer
 
 
         private InlineCommand _aboutCommand;
+        // Display the about dialog
         public InlineCommand aboutCommand
         {
             get
@@ -413,7 +388,8 @@ namespace MassPlistViewer
                 return _aboutCommand;
             }
         }
-        
+
+        #endregion
 
         #region Standard INotifyPropertyChanged Implementation
 
